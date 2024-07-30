@@ -1,12 +1,13 @@
 ﻿using My_App.Domain.Core.TypeBase;
 using My_App.Domain.Users.Events;
+using My_App.Domain.Users.ValueObjects;
 
 namespace My_App.Domain.Users;
 
-public sealed class User : AggregateRoot
+public sealed class User : AggregateRoot<UserId>
 {
     private User(string firstName, string lastName, string email, string password)
-        : base(Guid.NewGuid())
+        : base(UserId.Create())
     {
         FirstName = firstName;
         LastName = lastName;

@@ -1,6 +1,6 @@
 ﻿namespace My_App.Application.Core.Abstractions.Emails;
 
-public interface IEmailSender
+public interface IEmailService
 {
-    void SendEmail(string email);
+    Task SendEmail(string to, string from, string message);
 }

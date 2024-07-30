@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Exceptions\" />
+    <Compile Remove="Core\Exceptions\**" />
+    <EmbeddedResource Remove="Core\Exceptions\**" />
+    <None Remove="Core\Exceptions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Messages\Events\" />
+    <Folder Include="Messages\ValueObjects\" />
     <Folder Include="Orders\Events\" />
     <Folder Include="Orders\ValueObjects\" />
   </ItemGroup>

@@ -8,21 +8,41 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Exceptions\" />
-    <Folder Include="Core\Errors\" />
-    <Folder Include="Orders\Commands\" />
-    <Folder Include="Orders\Events\" />
-    <Folder Include="Orders\Queries\" />
-    <Folder Include="Posts\Commands\" />
-    <Folder Include="Posts\Events\" />
-    <Folder Include="Posts\Queries\" />
-    <Folder Include="Products\Commands\" />
-    <Folder Include="Products\Events\" />
-    <Folder Include="Products\Queries\" />
-    <Folder Include="Users\Events\PasswordUpdated\" />
-    <Folder Include="Users\Events\UserDeleted\" />
-    <Folder Include="Users\Events\UserUpdated\" />
-    <Folder Include="Users\Events\UserCreated\" />
+    <Compile Remove="Core\Errors\**" />
+    <Compile Remove="Core\Exceptions\**" />
+    <Compile Remove="Orders\**" />
+    <Compile Remove="Posts\**" />
+    <Compile Remove="Users\Events\PasswordUpdated\**" />
+    <Compile Remove="Users\Events\UserCreated\**" />
+    <Compile Remove="Users\Events\UserDeleted\**" />
+    <Compile Remove="Users\Events\UserUpdated\**" />
+    <EmbeddedResource Remove="Core\Errors\**" />
+    <EmbeddedResource Remove="Core\Exceptions\**" />
+    <EmbeddedResource Remove="Orders\**" />
+    <EmbeddedResource Remove="Posts\**" />
+    <EmbeddedResource Remove="Users\Events\PasswordUpdated\**" />
+    <EmbeddedResource Remove="Users\Events\UserCreated\**" />
+    <EmbeddedResource Remove="Users\Events\UserDeleted\**" />
+    <EmbeddedResource Remove="Users\Events\UserUpdated\**" />
+    <None Remove="Core\Errors\**" />
+    <None Remove="Core\Exceptions\**" />
+    <None Remove="Orders\**" />
+    <None Remove="Posts\**" />
+    <None Remove="Users\Events\PasswordUpdated\**" />
+    <None Remove="Users\Events\UserCreated\**" />
+    <None Remove="Users\Events\UserDeleted\**" />
+    <None Remove="Users\Events\UserUpdated\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Products\Commands\DeleteProduct\" />
+    <Folder Include="Products\Commands\UpdateProduct\" />
+    <Folder Include="Products\Events\ProductDeleted\" />
+    <Folder Include="Products\Events\ProductUpdated\" />
+    <Folder Include="Products\Events\ProductCreated\" />
+    <Folder Include="Products\Queries\GetAll\" />
+    <Folder Include="Products\Queries\GetById\" />
+    <Folder Include="Products\Queries\GetByName\" />
   </ItemGroup>
 
   <ItemGroup>

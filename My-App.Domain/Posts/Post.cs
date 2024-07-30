@@ -1,128 +1,91 @@
-﻿using My_App.Domain.Core.TypeBase;
+﻿using System;
+using System.Collections.Generic;
+using My_App.Domain.Core.TypeBase;
 using My_App.Domain.Posts.Events;
 using My_App.Domain.Posts.ValueObjects;
+using My_App.Domain.Users;
 
-namespace My_App.Domain.Posts;
-
-/// <summary>
-/// 
-/// </summary>
-public sealed class Post : AggregateRoot
+namespace My_App.Domain.Posts
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="title"></param>
-    /// <param name="content"></param>
-    /// <param name="authorId"></param>
-    /// <param name="likes"></param>
-    /// <param name="comments"></param>
-    private Post(string title, string content, Guid authorId, List<Like> likes, List<Comment> comments)
-        : base(Guid.NewGuid())
+    public sealed class Post : AggregateRoot<PostId>
     {
-        Title = title;
-        Content = content;
-        AuthorId = authorId;
-        CreatedOn = DateTime.UtcNow;
-        UpdatedOn = CreatedOn;
-        _likes = likes;
-        _comments = comments;
-    }
+        // Private constructor for creating a Post
+        private Post(string title, string content, Guid authorId, List<Guid> likeIds, List<Guid> commentIds)
+            : base(PostId.Create())
+        {
+            Title = title;
+            Content = content;
+            AuthorId = authorId;
+            CreatedOn = DateTime.UtcNow;
+            UpdatedOn = CreatedOn;
+            _likeIds = likeIds;
+            _commentIds = commentIds;
+        }
 
-    private Post() : base() { }
+        // Parameterless constructor for Entity Framework
+        private Post() : base() { }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public string Title { get; private set; } = default!;
+        public string Title { get; private set; } = default!;
+        public string Content { get; private set; } = default!;
+        public Guid AuthorId { get; private set; }
+        public DateTime CreatedOn { get; }
+        public DateTime? UpdatedOn { get; private set; }
+        public bool IsUpdated { get; private set; }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public string Content { get; private set; } = default!;
+        // Lists of foreign key IDs for likes and comments
+        private readonly List<Guid> _likeIds = new List<Guid>();
+        public IReadOnlyCollection<Guid> LikeIds => _likeIds.AsReadOnly();
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public Guid AuthorId { get; private set; }
+        private readonly List<Guid> _commentIds = new List<Guid>();
+        public IReadOnlyCollection<Guid> CommentIds => _commentIds.AsReadOnly();
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public DateTime CreatedOn { get; }
+        private readonly List<Guid> _sharedByUserIds = new List<Guid>();
+        public IReadOnlyCollection<Guid> SharedByUserIds => _sharedByUserIds.AsReadOnly();
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public DateTime? UpdatedOn { get; private set; }
+        // Factory method to create a new Post
+        public static Post Create(string title, string content, Guid authorId, List<Guid> likeIds, List<Guid> commentIds)
+        {
+            Post post = new(title, content, authorId, likeIds, commentIds);
+            post.RaiseDomainEvent(new PostCreatedDomainEvent(post));
+            return post;
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public bool IsUpdated { get; private set; }
+        // Method to update the post content
+        public void Update(string content)
+        {
+            Content = content;
+            UpdatedOn = DateTime.UtcNow;
+            IsUpdated = true;
+            RaiseDomainEvent(new PostUpdatedDomainEvent(this));
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    private readonly List<Like> _likes = [];
-    public IReadOnlyCollection<Like> Likes => _likes.AsReadOnly();
+        // Method to add a comment (by comment ID)
+        public void AddComment(Guid commentId)
+        {
+            if (!_commentIds.Contains(commentId))
+            {
+                _commentIds.Add(commentId);
+                RaiseDomainEvent(new NewCommentDomainEvent(commentId));
+            }
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    private readonly List<Comment> _comments = [];
-    public IReadOnlyCollection<Comment> Comments => _comments.AsReadOnly();
+        // Method to add a like (by like ID)
+        public void AddLike(Guid likeId)
+        {
+            if (!_likeIds.Contains(likeId))
+            {
+                _likeIds.Add(likeId);
+                RaiseDomainEvent(new NewLikeDomainEvent(likeId));
+            }
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="title"></param>
-    /// <param name="content"></param>
-    /// <param name="authorId"></param>
-    /// <param name="likes"></param>
-    /// <param name="comments"></param>
-    /// <returns></returns>
-    public static Post Create(string title, string content, Guid authorId, List<Like> likes, List<Comment> comments)
-    {
-        Post post = new(title, content, authorId, likes, comments);
-
-        post.RaiseDomainEvent(new PostCreatedDomainEvent(post));
-
-        return post;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="content"></param>
-    public void Update(string content)
-    {
-        Content = content;
-        UpdatedOn = DateTime.UtcNow;
-        IsUpdated = true;
-
-        RaiseDomainEvent(new PostUpdatedDomainEvent(this));
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="comment"></param>
-    public void AddComment(Comment comment)
-    {
-        _comments.Add(comment);
-
-        RaiseDomainEvent(new NewCommentDomainEvent(comment));
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="like"></param>
-    public void AddLike(Like like)
-    {
-        _likes.Add(like);
-
-        RaiseDomainEvent(new NewLikeDomainEvent(like));
+        // Method to add a user who shared the post (by user ID)
+        public void AddShare(Guid userId)
+        {
+            if (!_sharedByUserIds.Contains(userId))
+            {
+                _sharedByUserIds.Add(userId);
+            }
+        }
     }
 }

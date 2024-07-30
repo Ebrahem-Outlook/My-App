@@ -2,17 +2,26 @@
 
 namespace My_App.Domain.Core.TypeBase;
 
-public abstract class AggregateRoot : Entity
+public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot<TId>
 {
-    protected AggregateRoot(Guid id) : base(id) { }
+    protected AggregateRoot(TId id) : base(id) { }
 
     protected AggregateRoot() : base() { }
 
-    private List<IDomainEvent> domainEvents = [];
+    private readonly List<IDomainEvent> domainEvents = [];
 
     public IReadOnlyCollection<IDomainEvent> DomainEvents => domainEvents.AsReadOnly();
 
     public void RaiseDomainEvent(IDomainEvent @event) => domainEvents.Add(@event);
 
-    public void ClearDomainEvent() => domainEvents.Clear();
+    public void ClearDomainEvents() => domainEvents.Clear();
+}
+
+public interface IAggregateRoot<TId>
+{
+    TId Id { get; }
+
+    void RaiseDomainEvent(IDomainEvent @event);
+
+    void ClearDomainEvents();
 }

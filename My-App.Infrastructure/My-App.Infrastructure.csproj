@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Authentication\Setting\" />
+    <Compile Remove="Authentication\Setting\**" />
+    <EmbeddedResource Remove="Authentication\Setting\**" />
+    <None Remove="Authentication\Setting\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +19,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\My-App.Application\My-App.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Authentication\Settings\" />
   </ItemGroup>
 
 </Project>

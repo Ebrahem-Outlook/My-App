@@ -1,12 +1,13 @@
 ﻿using My_App.Domain.Core.TypeBase;
 using My_App.Domain.Products.Events;
+using My_App.Domain.Products.ValueObjects;
 
 namespace My_App.Domain.Products;
 
-public sealed class Product : AggregateRoot
+public sealed class Product : AggregateRoot<ProductId>
 {
     private Product(Guid userId, string name, string description, decimal price, int stock)
-        : base(Guid.NewGuid())
+        : base(ProductId.Create())
     {
         UserId = userId;
         Name = name;
@@ -14,10 +15,9 @@ public sealed class Product : AggregateRoot
         Price = price;
         Stock = stock;
         CreatedOn = DateTime.UtcNow;
-        UpdatedOn = CreatedOn;
     }
 
-    private Product() : base(Guid.NewGuid()) { }
+    private Product() : base() { }
 
     public Guid UserId { get; }
     public string Name { get; private set; } = default!;
