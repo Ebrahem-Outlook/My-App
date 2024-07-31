@@ -20,4 +20,10 @@
     <ProjectReference Include="..\My-App.Infrastructure\My-App.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\Orders\" />
+    <Folder Include="Contracts\Products\" />
+    <Folder Include="Contracts\Posts\" />
+  </ItemGroup>
+
 </Project>

@@ -3,5 +3,3 @@
 namespace My_App.Application.Users.Commands.UpdatePassword;
 
 public sealed record UpdatePasswordCommand(Guid UserId, string Password) : ICommand;
-
-

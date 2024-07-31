@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using My_App.Application.Core.Abstractions.Data;
 using My_App.Domain.Core.TypeBase;
@@ -10,7 +11,7 @@ public sealed class AppDbContext : DbContext, IDbContext, IUnitOfWork
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){ }
 
-    public new DbSet<TEntity> Set<TEntity>() where TEntity : Entity
+    public new DbSet<TEntity> Set<TEntity>() where TEntity : class
     {
         return base.Set<TEntity>();
     }

@@ -3,4 +3,4 @@ using My_App.Domain.Posts.ValueObjects;
 
 namespace My_App.Domain.Posts.Events;
 
-public sealed record NewLikeDomainEvent(Like Like) : DomainEvent();
+public sealed record NewLikeDomainEvent(Guid LikeId) : DomainEvent();

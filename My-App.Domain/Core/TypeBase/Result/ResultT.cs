@@ -1,8 +1,8 @@
 ﻿namespace My_App.Domain.Core.TypeBase.Result;
 
-public class ResultT<TValue> : Result
+public class Result<TValue> : Result
 {
-    protected ResultT(bool isSuccess, Error error) : base(isSuccess, error)
+    protected Result(bool isSuccess, Error error) : base(isSuccess, error)
     {
     }
 }

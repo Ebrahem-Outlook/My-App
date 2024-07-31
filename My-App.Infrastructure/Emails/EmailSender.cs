@@ -2,9 +2,9 @@
 
 namespace My_App.Infrastructure.Emails;
 
-internal class EmailSender : IEmailSender
+internal class EmailSender : IEmailService
 {
-    public void SendEmail(string email)
+    public Task SendEmail(string to, string from, string message)
     {
         throw new NotImplementedException();
     }
