@@ -8,6 +8,6 @@ public interface IPostRepository
     Task Delete(Post post, CancellationToken cancellationToken = default);
 
     // Queries.
-    Task<Post> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
-    Task<List<Post>> GetByAutherIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<Post?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<List<Post>?> GetByAutherIdAsync(Guid id, CancellationToken cancellationToken = default);
 }

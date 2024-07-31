@@ -15,7 +15,13 @@
 
   <ItemGroup>
     <PackageReference Include="CassandraCSharpDriver" Version="3.20.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.28.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +30,8 @@
 
   <ItemGroup>
     <Folder Include="Authentication\Settings\" />
+    <Folder Include="Emails\Settings\" />
+    <Folder Include="Messaging\Settings\" />
   </ItemGroup>
 
 </Project>
