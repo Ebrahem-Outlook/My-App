@@ -19,8 +19,13 @@
   <ItemGroup>
     <Folder Include="Messages\" />
     <Folder Include="Notifications\" />
-    <Folder Include="Orders\" />
-    <Folder Include="Posts\" />
+    <Folder Include="Orders\Commands\CreateOrder\" />
+    <Folder Include="Orders\Commands\UpdateOrder\" />
+    <Folder Include="Orders\Events\" />
+    <Folder Include="Orders\Queries\GetById\" />
+    <Folder Include="Posts\Commands\" />
+    <Folder Include="Posts\Events\" />
+    <Folder Include="Posts\Queries\" />
     <Folder Include="Products\Events\ProductCreated\" />
     <Folder Include="Products\Events\ProductDeleted\" />
     <Folder Include="Products\Events\ProductUpdated\" />

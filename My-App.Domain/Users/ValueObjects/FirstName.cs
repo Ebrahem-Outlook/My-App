@@ -13,7 +13,7 @@ public sealed class FirstName : ValueObject
         return new FirstName(firstName);
     }
 
-    protected override IEnumerable<object> GetEqualityComponents()
+    protected override IEnumerable<object> GetEqualityComponents() 
     {
         yield return Value;
     }

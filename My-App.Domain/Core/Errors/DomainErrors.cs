@@ -21,5 +21,10 @@ public static class DomainErrors
     {
 
     }
+
+    public static class Message_Error
+    {
+
+    }
 }
 
