@@ -34,7 +34,7 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         // Configure the Password property
         builder.Property(user => user.Password)
-            .HasColumnName("HashPasword") 
+            .HasColumnName("HashPasword")
             .HasColumnType("varchar(50)")
             .IsRequired();
     }

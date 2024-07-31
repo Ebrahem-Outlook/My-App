@@ -9,7 +9,7 @@ public interface IUserRepository
 
     // Queries.
     Task<List<User>?> GetAllAsync(CancellationToken cancellationToken = default);
-    Task<User?> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default);
+    // Task<User?> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default);
     Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
     Task<List<User>?> GetByNameAsync(string name, CancellationToken cancellationToken = default);
 }

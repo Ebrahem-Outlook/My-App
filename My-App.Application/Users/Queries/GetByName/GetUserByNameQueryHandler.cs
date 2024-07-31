@@ -13,24 +13,8 @@ internal sealed class GetUserByNameQueryHandler : IQueryHandler<GetUserByNameQue
         _userRepository = userRepository;
     }
 
-    public async Task<List<UserDTO>> Handle(GetUserByNameQuery request, CancellationToken cancellationToken)
+    public Task<List<UserDTO>> Handle(GetUserByNameQuery request, CancellationToken cancellationToken)
     {
-        List<User>? users = await _userRepository.GetByNameAsync(request.Name, cancellationToken);
-
-        if (users is null)
-        {
-            throw new NullReferenceException();
-        }
-
-        List<UserDTO> userDTOs = new List<UserDTO>(users.Count);
-
-        foreach(User user in users)
-        {
-            UserDTO userDTO = new(user.Id, user.FirstName, user.LastName, user.Email, user.Password);
-
-            userDTOs.Add(userDTO);
-        }
-
-        return userDTOs;
+        throw new NotImplementedException();
     }
 }

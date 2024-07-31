@@ -12,24 +12,8 @@ internal sealed class GetAllUsersQueryHandler : IQueryHandler<GetAllUsersQuery, 
         _userRepository = userRepository;
     }
 
-    public async Task<List<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+    public Task<List<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
-        List<User>? users = await _userRepository.GetAllAsync(cancellationToken);
-
-        if (users is null)
-        {
-            throw new NullReferenceException();
-        }
-
-        List<UserDTO> userDTOs = new List<UserDTO>(users.Count);
-
-        foreach (var user in users) 
-        {
-            UserDTO userDTO = new(user.Id, user.FirstName, user.LastName, user.Email, user.Password);
-
-            userDTOs.Add(userDTO);
-        }
-
-        return userDTOs;
+        throw new NotImplementedException();
     }
 }

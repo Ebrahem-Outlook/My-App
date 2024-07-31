@@ -35,8 +35,5 @@ internal sealed class ProductRepository(IDbContext dbContext) : IProductReposito
         return await dbContext.Set<Product>().Where(product => product.UserId == userId).ToListAsync(cancellationToken);
     }
 
-    public async Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken = default)
-    {
-        return await dbContext.Set<Product>().FirstOrDefaultAsync(product => product.Id == productId, cancellationToken);
-    }
+    
 }

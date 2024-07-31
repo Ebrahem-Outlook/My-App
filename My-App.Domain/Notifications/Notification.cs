@@ -2,7 +2,7 @@
 
 namespace My_App.Domain.Notifications;
 
-public sealed class Notification : Entity 
+public sealed class Notification 
 {
     
 }

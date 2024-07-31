@@ -6,3 +6,97 @@ services:
     build:
       context: .
       dockerfile: My-App.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_ENVIRONMENT=Development
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+      - elasticsearch
+      - ravendb
+      - smtp
+    ports:
+      - "5000:80" # Expose API on port 5000
+    volumes:
+      - ./appsettings.Docker.json:/app/appsettings.Docker.json
+    networks:
+      - myapp-network
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: myappdb
+      POSTGRES_USER: myappuser
+      POSTGRES_PASSWORD: myapppassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myappuser"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - myapp-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"  # RabbitMQ message broker
+      - "15672:15672" # RabbitMQ management console
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - myapp-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - myapp-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.2
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsSL http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - myapp-network
+
+  ravendb:
+    image: ravendb/ravendb:5.2
+    environment:
+      RAVEN_Setup_Mode: None
+      RAVEN_Accept_Eula: "true"
+    ports:
+      - "8080:8080"
+    networks:
+      - myapp-network
+
+  smtp:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"  # SMTP server
+      - "8025:8025"  # Web UI
+
+volumes:
+  postgres_data:
+  esdata:
+
+networks:
+  myapp-network:

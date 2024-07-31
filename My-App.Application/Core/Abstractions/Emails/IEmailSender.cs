@@ -1,6 +1,8 @@
-﻿namespace My_App.Application.Core.Abstractions.Emails;
+﻿using System.Threading.Tasks;
+
+namespace My_App.Application.Core.Abstractions.Emails;
 
 public interface IEmailService
 {
-    Task SendEmail(string to, string from, string message);
+    Task SendEmailAsync(string to, string subject, string body);
 }

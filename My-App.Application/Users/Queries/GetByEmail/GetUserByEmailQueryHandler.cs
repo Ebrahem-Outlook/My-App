@@ -13,15 +13,8 @@ internal sealed class GetUserByEmailQueryHandler : IQueryHandler<GetUserByEmailQ
         _userRepository = userRepository;
     }
 
-    public async Task<UserDTO> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
+    public Task<UserDTO> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
     {
-        User? user = await _userRepository.GetByEmailAsync(request.Email, cancellationToken);
-
-        if (user is null)
-        {
-            throw new ArgumentNullException();
-        }
-
-        return new(user.Id, user.FirstName, user.LastName, user.Email, user.Password);
+        throw new NotImplementedException();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace My_App.Domain.Core.Events;
 
-public interface IDomainEvent : IEvent
+public interface IDomainEvent : INotification
 {
     Guid Id { get; }
 

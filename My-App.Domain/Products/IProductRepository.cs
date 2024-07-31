@@ -9,6 +9,6 @@ public interface IProductRepository
 
     // Queries.
     Task<List<Product>?> GetAllAsync(CancellationToken cancellationToken = default);
-    Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken = default);
+    // Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken = default);
     Task<List<Product>?> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken = default);
 }

@@ -2,6 +2,7 @@
 using My_App.Application.Core.Abstractions.Authentication;
 using My_App.Application.Core.Abstractions.Data;
 using My_App.Application.Core.Abstractions.Messaging;
+using My_App.Domain.Core.TypeBase.Result;
 using My_App.Domain.Users;
 
 namespace My_App.Application.Users.Commands.UpdatePassword;
@@ -21,7 +22,7 @@ internal sealed class UpdatePasswordCommandHandler : ICommandHandler<UpdatePassw
         _logger = logger;
     }
 
-    public Task Handle(UpdatePasswordCommand request, CancellationToken cancellationToken)
+    public Task<Result> Handle(UpdatePasswordCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

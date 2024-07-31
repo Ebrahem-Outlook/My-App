@@ -4,10 +4,10 @@ using My_App.Domain.Products.ValueObjects;
 
 namespace My_App.Domain.Products;
 
-public sealed class Product : AggregateRoot<ProductId>
+public sealed class Product : AggregateRoot<Guid>
 {
     private Product(Guid userId, string name, string description, decimal price, int stock)
-        : base(ProductId.Create())
+        : base(Guid.NewGuid())
     {
         UserId = userId;
         Name = name;

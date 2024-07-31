@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using My_App.Domain.Core.TypeBase;
+﻿using My_App.Domain.Core.TypeBase;
 using My_App.Domain.Posts.Events;
-using My_App.Domain.Posts.ValueObjects;
-using My_App.Domain.Users;
 
 namespace My_App.Domain.Posts
 {
-    public sealed class Post : AggregateRoot<PostId>
+    public sealed class Post : AggregateRoot<Guid>
     {
         // Private constructor for creating a Post
         private Post(string title, string content, Guid authorId, List<Guid> likeIds, List<Guid> commentIds)
-            : base(PostId.Create())
+            : base(Guid.NewGuid())
         {
             Title = title;
             Content = content;

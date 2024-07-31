@@ -10,19 +10,17 @@
   <ItemGroup>
     <Compile Remove="Core\Errors\**" />
     <Compile Remove="Core\Exceptions\**" />
-    <Compile Remove="Orders\**" />
-    <Compile Remove="Posts\**" />
     <EmbeddedResource Remove="Core\Errors\**" />
     <EmbeddedResource Remove="Core\Exceptions\**" />
-    <EmbeddedResource Remove="Orders\**" />
-    <EmbeddedResource Remove="Posts\**" />
     <None Remove="Core\Errors\**" />
     <None Remove="Core\Exceptions\**" />
-    <None Remove="Orders\**" />
-    <None Remove="Posts\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Messages\" />
+    <Folder Include="Notifications\" />
+    <Folder Include="Orders\" />
+    <Folder Include="Posts\" />
     <Folder Include="Products\Events\ProductCreated\" />
     <Folder Include="Products\Events\ProductDeleted\" />
     <Folder Include="Products\Events\ProductUpdated\" />

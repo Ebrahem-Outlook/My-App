@@ -37,10 +37,7 @@ internal sealed class UserRepository(IDbContext dbContext) : IUserRepository
         return await dbContext.Set<User>().FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
     }
 
-    public async Task<User?> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default)
-    {
-        return await dbContext.Set<User>().FirstOrDefaultAsync(user => user.Id == userId, cancellationToken);
-    }
+   
 
     public async Task<List<User>?> GetByNameAsync(string name, CancellationToken cancellationToken = default)
     {

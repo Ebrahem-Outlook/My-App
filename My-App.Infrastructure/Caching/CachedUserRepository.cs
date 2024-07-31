@@ -37,10 +37,7 @@ internal sealed class CachedUserRepository(UserRepository decorated, IDistribute
         return await decorated.GetByEmailAsync(email, cancellationToken);
     }
 
-    public async Task<User?> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default)
-    {
-        return await decorated.GetByIdAsync(userId, cancellationToken);
-    }
+    
 
     public async Task<List<User>?> GetByNameAsync(string name, CancellationToken cancellationToken = default)
     {

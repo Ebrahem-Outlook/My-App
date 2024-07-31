@@ -2,4 +2,7 @@
 
 namespace My_App.Application.Users.Events.EmailUpdated;
 
-public sealed record EmailUpdatedIntegrationEvent() : IIntegrationEvent;
+public sealed record EmailUpdatedIntegrationEvent
+{
+
+}

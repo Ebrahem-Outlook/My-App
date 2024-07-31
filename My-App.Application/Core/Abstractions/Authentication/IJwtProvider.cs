@@ -4,5 +4,5 @@ namespace My_App.Application.Core.Abstractions.Authentication;
 
 public interface IJwtProvider
 {
-    Task<string> GenerateToken(User user);
+    string GenerateToken(User user);
 }
