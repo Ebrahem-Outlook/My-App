@@ -11,7 +11,7 @@ public interface IQueryHandler<TQuery> : IRequestHandler<TQuery, Result>
 
 public interface IQueryHandler<TQuery, TResponse> : IRequestHandler<TQuery, TResponse>
     where TQuery : IQuery<TResponse>
-    where TResponse : Result<TResponse>
+    where TResponse : class
 {
 
 }

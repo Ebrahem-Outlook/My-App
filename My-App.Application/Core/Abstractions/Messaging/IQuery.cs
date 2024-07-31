@@ -9,7 +9,7 @@ public interface IQuery : IRequest<Result>
 }
 
 public interface IQuery<out TResponse> : IRequest<TResponse>
-    where TResponse : Result<TResponse>
+    where TResponse : class
 {
     
 }
